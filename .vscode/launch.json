@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-KnowSphereApplication<Know_Sphere>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "vn.fs.KnowSphereApplication",
+            "projectName": "Know_Sphere",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HoaYenApplication<Hoa_Yen>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "vn.fs.HoaYenApplication",
+            "projectName": "Hoa_Yen",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
