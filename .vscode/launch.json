@@ -10,15 +10,5 @@
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
-        {
-            "type": "java",
-            "name": "Spring Boot-HoaYenApplication<Hoa_Yen>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "vn.fs.HoaYenApplication",
-            "projectName": "Hoa_Yen",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
     ]
 }
