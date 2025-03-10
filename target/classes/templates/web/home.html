@@ -77,15 +77,18 @@
 			</div>
 		</div>
 	</section>
-	<section class="section suggest-part" style="margin-top: 30px;">
+	<section class="section suggest-part" style="margin-top: 30px; margin-bottom: 50px;">
 		<div class="container">
 			<ul class="suggest-slider slider-arrow">
 				<li th:each="item : ${coutnProductByCategory}">
-					<a class="suggest-card" th:href="@{/productByCategory(id=${item[0]})}">
-						<img src="https://img.freepik.com/premium-photo/old-book-with-flying-letters-magic-light-background-bookshelf-library-anci_1015979-447.jpg"
+					<a class="suggest-card" th:href="@{/productByCategory(id=${item[0]})}"
+						style="text-decoration: none;">
+						<img src="https://res.cloudinary.com/dxgr5jgxn/image/upload/v1741593770/Know_Sphere/Banner/vaulhx0zrffx4cnuwxm2.png"
 							alt="suggest" />
-						<h5>
-							[[${item[1]}]] <span>số lượng : [[${item[2]}]] </span>
+						<h5
+							style="font-family: 'Source Serif Pro', serif; color: #FEF6BA; margin: 10px 0; text-align: center;">
+							[[${item[1]}]] <span style="font-family: 'Source Serif Pro', serif; color: #FEF6BA;">số
+								lượng : [[${item[2]}]]</span>
 						</h5>
 					</a>
 				</li>
@@ -93,41 +96,56 @@
 		</div>
 	</section>
 	<style>
+		/* Reset mặc định */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
 		.product-card {
-			border: 1px solid #e0e0e0;
+			position: relative;
+			z-index: 5;
+			/* Đặt thấp hơn section-heading */
+			border: 1px solid #e5e5e5;
 			border-radius: 8px;
 			overflow: hidden;
 			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			background: #fff;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 		}
 
 		.product-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transform: translateY(-3px);
+			/* Giảm mức di chuyển */
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 		}
 
 		.product-media {
 			position: relative;
-			overflow: hidden;
 			height: 200px;
-			/* Cố định chiều cao hình ảnh */
+			overflow: hidden;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			background: #f5f5f5;
+			/* Nền xám nhạt giống Fahasa */
 		}
 
 		.product-media img {
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
-			/* Đảm bảo hình ảnh không bị méo */
-			transition: transform 0.3s ease;
+			object-fit: contain;
+			/* Giữ nguyên tỷ lệ ảnh như Fahasa */
+			transition: transform 0.4s ease;
 		}
 
 		.product-media:hover img {
-			transform: scale(1.1);
+			transform: scale(1.05);
+			/* Zoom nhẹ giống Fahasa */
 		}
 
 		.product-label {
@@ -135,24 +153,28 @@
 			top: 10px;
 			left: 10px;
 			z-index: 2;
+			display: flex;
+			gap: 5px;
 		}
 
 		.product-label .label-text {
-			display: inline-block;
-			padding: 5px 10px;
+			padding: 3px 8px;
 			border-radius: 3px;
-			font-size: 12px;
-			font-weight: bold;
+			font-size: 10px;
+			font-weight: 700;
 			color: #fff;
-			margin-right: 5px;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
 		}
 
 		.product-label .new {
-			background-color: #28a745;
+			background-color: #e21e2a;
+			/* Đỏ đặc trưng của Fahasa */
 		}
 
 		.product-label .sale {
-			background-color: #dc3545;
+			background-color: #ff9800;
+			/* Cam để làm nổi bật giảm giá */
 		}
 
 		.product-wish {
@@ -162,13 +184,16 @@
 			z-index: 2;
 			background: none;
 			border: none;
-			color: #ff4757;
+			color: #ccc;
+			/* Xám nhạt mặc định */
 			font-size: 18px;
 			cursor: pointer;
+			transition: color 0.3s ease;
 		}
 
 		.product-wish:hover {
-			color: #ff6b81;
+			color: #e21e2a;
+			/* Đỏ khi hover */
 		}
 
 		.product-widget {
@@ -176,22 +201,23 @@
 			bottom: 10px;
 			right: 10px;
 			z-index: 2;
+			display: flex;
+			gap: 6px;
 		}
 
 		.product-widget a {
-			display: inline-block;
-			margin-left: 5px;
-			color: #ffffff;
-			font-size: 16px;
+			color: #888;
+			font-size: 15px;
 			transition: color 0.3s ease;
 		}
 
 		.product-widget a:hover {
-			color: #adcdef;
+			color: #e21e2a;
+			/* Đỏ khi hover */
 		}
 
 		.product-content {
-			padding: 15px;
+			padding: 12px;
 			flex: 1;
 			display: flex;
 			flex-direction: column;
@@ -199,66 +225,132 @@
 		}
 
 		.product-rating {
-			color: #ffc107;
-			margin-bottom: 10px;
+			color: #ff9800;
+			/* Cam giống Fahasa */
+			margin-bottom: 6px;
 		}
 
 		.product-rating .icofont-star {
-			font-size: 14px;
+			font-size: 12px;
 		}
 
 		.product-name {
-			font-size: 16px;
+			font-size: 14px;
 			font-weight: 600;
-			margin-bottom: 10px;
+			margin-bottom: 8px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			color: #333;
+		}
+
+		.product-name a {
+			text-decoration: none;
+			color: inherit;
+			transition: color 0.3s ease;
+		}
+
+		.product-name a:hover {
+			color: #e21e2a;
+			/* Đỏ khi hover */
 		}
 
 		.product-price {
-			font-size: 18px;
+			font-size: 16px;
 			font-weight: 700;
-			color: #333;
+			color: #e21e2a;
+			/* Giá chính màu đỏ */
 			margin-bottom: 10px;
 		}
 
 		.product-price del {
-			color: #999;
-			font-size: 14px;
+			color: #888;
+			font-size: 12px;
 			margin-right: 5px;
 		}
 
 		.product-price span {
-			color: #ff4757;
+			color: #e21e2a;
+			/* Giá giảm giữ màu đỏ */
 		}
 
 		.product-add1 {
-			display: inline-block;
-			padding: 10px 15px;
-			background-color: #ff4757;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 8px 14px;
+			background-color: #e21e2a;
+			/* Đỏ Fahasa */
 			color: #fff;
-			border-radius: 5px;
-			text-align: center;
-			font-size: 14px;
+			border-radius: 4px;
+			font-size: 13px;
 			font-weight: 600;
+			text-decoration: none;
 			transition: background-color 0.3s ease;
 		}
 
 		.product-add1:hover {
-			background-color: #ff6b81;
+			background-color: #c21822;
+			/* Đỏ đậm hơn khi hover */
+			color: #fff;
+		}
+
+		.product-add1 i {
+			margin-right: 5px;
+		}
+
+		/* Section Styling */
+		.recent-part {
+			padding: 50px 0;
+			background: #fff;
+			/* Nền trắng giống Fahasa */
+		}
+
+		.section-heading h2 {
+			font-size: 24px;
+			font-weight: 700;
+			color: #e21e2a;
+			z-index: 10;
+			/* Đỏ cho tiêu đề */
+			text-align: left;
+			/* Căn trái giống Fahasa */
+			margin-bottom: 30px;
+			position: relative;
+			padding-bottom: 8px;
+		}
+
+		.section-heading h2::after {
+			content: '';
+			width: 50px;
+			height: 3px;
+			background: #e21e2a;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+
+		.section-btn-25 {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.section-btn-25 .btn-outline {
+			padding: 10px 20px;
+			border: 1px solid #e21e2a;
+			color: #e21e2a;
+			font-weight: 600;
+			border-radius: 4px;
 			text-decoration: none;
+			transition: all 0.3s ease;
 		}
 
-		/* Màu xám cho nút yêu thích (tym) */
-		.product-wish {
-			color: #999;
-			/* Màu xám */
+		.section-btn-25 .btn-outline:hover {
+			background: #e21e2a;
+			color: #fff;
 		}
 
-		.product-wish:hover {
-			color: #ff4757;
-			/* Màu đỏ khi hover */
+		.section-btn-25 .btn-outline i {
+			margin-right: 5px;
 		}
 	</style>
 	<section class="section recent-part">
@@ -277,8 +369,8 @@
 							<div class="product-card">
 								<div class="product-media">
 									<div class="product-label">
-										<label class="label-text new">bán chạy</label>
-										<label class="label-text sale">- [[${item.discount + '%'}]]</label>
+										<label class="label-text new">Bán Chạy</label>
+										<label class="label-text sale" th:text="'-' + ${item.discount} + '%'"></label>
 									</div>
 									<button class="product-wish wish">
 										<i class="fas fa-heart"></i>
@@ -287,13 +379,10 @@
 										<img th:src="@{'/loadImage?imageName='+${item.productImage}}" alt="product" />
 									</a>
 									<div class="product-widget">
-
 										<a title="Video sản phẩm" href="#" class="venobox fas fa-play"
-											data-autoplay="true" data-vbtype="video">
-										</a>
+											data-autoplay="true" data-vbtype="video"></a>
 										<a title="Chi tiết sản phẩm" th:href="@{/productDetail(id=${item.productId})}"
-											class="fas fa-eye">
-										</a>
+											class="fas fa-eye"></a>
 									</div>
 								</div>
 								<div class="product-content">
@@ -304,39 +393,40 @@
 										<i class="active icofont-star"></i>
 										<i class="icofont-star"></i>
 									</div>
-
 									<h6 class="product-name">
-										<a th:href="@{/productDetail(id=${item.productId})}">[[${item.productName}]]</a>
+										<a th:href="@{/productDetail(id=${item.productId})}"
+											th:text="${item.productName}"></a>
 									</h6>
 									<h6 class="product-price">
-										<del>[[${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}+'
-											đ']]</del>
-										<span>[[${#numbers.formatDecimal(item.price - (item.price * item.discount/100),
-											1, 'DEFAULT', 0, 'DEFAULT')}+' đ']]<small></small></span>
+										<del
+											th:text="${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></del>
+										<span
+											th:text="${#numbers.formatDecimal(item.price - (item.price * item.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></span>
 									</h6>
 									<a class="product-add1" title="Thêm giỏ hàng"
 										th:href="@{/addToCart(productId=${item.productId})}">
-										<i class="fas fa-shopping-basket"></i><span>Thêm giỏ hàng</span>
+										<i class="fas fa-shopping-basket"></i>
+										<span>Thêm vào giỏ</span>
 									</a>
-
 								</div>
 							</div>
 						</li>
 					</ul>
 				</div>
-
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-btn-25">
-						<a th:href="@{/products}" class="btn btn-outline"><i class="fas fa-eye"></i><span>xem
-								thêm</span></a>
+						<a th:href="@{/products}" class="btn btn-outline">
+							<i class="fas fa-eye"></i>
+							<span>Xem thêm</span>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="section promo-part">
+	<!-- <div class="section promo-part">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -348,7 +438,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<section class="section feature-part">
 		<div class="container">
 			<div class="row">

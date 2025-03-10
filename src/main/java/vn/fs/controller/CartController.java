@@ -210,7 +210,7 @@ public class CartController extends CommomController {
 		}
 
 		// sendMail
-		commomDataService.sendSimpleEmail(user.getEmail(), "Hoa-Yen Xác Nhận Đơn hàng", "aaaa", cartItems,
+		commomDataService.sendSimpleEmail(user.getEmail(), "KnowSphere Xác Nhận Đơn hàng", "aaaa", cartItems,
 				totalPrice, order);
 
 		shoppingCartService.clear();
@@ -260,7 +260,7 @@ public class CartController extends CommomController {
 				}
 
 				// sendMail
-				commomDataService.sendSimpleEmail(user.getEmail(), "Hoa-Yen Xác Nhận Đơn hàng", "aaaa", cartItems,
+				commomDataService.sendSimpleEmail(user.getEmail(), "KnowSphere Xác Nhận Đơn hàng", "aaaa", cartItems,
 						totalPrice, orderFinal);
 
 				shoppingCartService.clear();

@@ -68,166 +68,137 @@
 					</div>
 					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header">
-								<div class="d-flex align-items-center">
-									<h4 class="card-title" style="text-decoration: underline;">Quản lý sản phẩm</h4>
-									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-										data-target="#addRowModal">
-										<i class="fa fa-plus"></i>
-										Thêm mới
-									</button>
-								</div>
+							<div class="card-header d-flex align-items-center justify-content-between">
+								<h4 class="card-title m-0" style="text-decoration: underline;">Quản lý sản phẩm</h4>
+								<button class="btn btn-primary btn-round" data-toggle="modal"
+									data-target="#addRowModal">
+									<i class="fa fa-plus"></i> Thêm mới
+								</button>
 							</div>
-							<div class="card-body">
-								<!-- Modal -->
-								<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header no-bd">
-												<h5 class="modal-title">
-													<span class="fw-mediumbold"
-														style="text-decoration: underline; color: black;">
-														thêm mới sản phẩm</span>
-												</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<form th:action="@{/admin/addProduct}" th:object="${product}"
-													method="post" enctype="multipart/form-data">
-													<div class="row">
-														<div class="col-sm-12">
-															<div class="form-group form-group-default">
-																<label>Tên sản phẩm</label>
-																<input th:field="*{productName}" id="productName"
-																	type="text" class="form-control"
-																	placeholder="Tên sản phẩm...">
-															</div>
-														</div>
-														<div class="col-md-6 pr-0">
-															<div class="form-group form-group-default">
-																<label>Thể loại</label>
-																<select class="form-control" name="category"
-																	th:field="*{category.categoryId}" id="categoryId">
-																	<option th:each="item : ${categoryList}"
-																		th:value="${item.categoryId}"
-																		th:text="${item.categoryName}"
-																		th:selected="${item.categoryId == product.category.categoryId}">
-																		Category Name
-																	</option>
-																</select>
-															</div>
-														</div>
 
-														<div class="col-md-6 pr-0">
-															<div class="form-group form-group-default">
-																<label>Đơn giá</label>
-																<input th:field="*{price}" id="price" min=0
-																	type="number" class="form-control"
-																	placeholder="Đơn giá">
-															</div>
-														</div>
-														<div class="col-md-6 pr-0">
-															<div class="form-group form-group-default">
-																<label>Số lượng</label>
-																<input th:field="*{quantity}" id="quantity" min=0
-																	type="number" class="form-control"
-																	placeholder="Số lượng">
-															</div>
-														</div>
-														<div class="col-md-6 pr-0">
-															<div class="form-group form-group-default">
-																<label>Giảm giá</label>
-																<input th:field="*{discount}" id="discount" min=0
-																	type="number" class="form-control"
-																	placeholder="Giảm giá">
-															</div>
-														</div>
-														<div class="col-md-6 pr-0">
-															<div class="form-group form-group-default">
-																<label>Ngày thêm</label>
-																<input th:field="*{enteredDate}" id="enteredDate"
-																	type="date" class="form-control"
-																	placeholder="Ngày thêm">
-															</div>
-														</div>
-														<div class="col-sm-12">
-															<div class="form-group form-group-default">
-																<label>Images</label>
-																<input type="file" id="productImage" name="file"
-																	class="form-control">
-															</div>
-														</div>
-														<div class="col-sm-12">
-															<div class="form-group form-group-default">
-																<label>Mô tả sản phẩm</label>
-																<textarea th:field="*{description}" id="description"
-																	class="form-control"
-																	placeholder="Mô tả sản phẩm"></textarea>
-															</div>
-														</div>
+							<!-- Modal Thêm Sản Phẩm -->
+							<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header border-0">
+											<h5 class="modal-title fw-mediumbold" style="text-decoration: underline;">
+												Thêm sản phẩm</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">×</button>
+										</div>
+										<div class="modal-body">
+											<form th:action="@{/admin/addProduct}" th:object="${product}" method="post"
+												enctype="multipart/form-data">
+												<div class="row">
+													<div class="col-12 mb-3">
+														<label>Tên sản phẩm</label>
+														<input th:field="*{productName}" class="form-control"
+															placeholder="Tên sản phẩm..." required>
 													</div>
-													<div class="modal-footer no-bd">
-														<button type="submit" id="" class="btn btn-primary">Thêm
-															mới</button>
-														<button type="button" class="btn btn-danger"
-															data-dismiss="modal">Hủy</button>
+													<div class="col-md-6 mb-3">
+														<label>Thể loại</label>
+														<select class="form-control" th:field="*{category.categoryId}">
+															<option th:each="item : ${categoryList}"
+																th:value="${item.categoryId}"
+																th:text="${item.categoryName}"></option>
+														</select>
 													</div>
-												</form>
-											</div>
+													<div class="col-md-6 mb-3">
+														<label>Đơn giá (VNĐ)</label>
+														<input th:field="*{price}" type="number" min="0"
+															class="form-control" placeholder="Đơn giá" required>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label>Số lượng</label>
+														<input th:field="*{quantity}" type="number" min="0"
+															class="form-control" placeholder="Số lượng" required>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label>Giảm giá (%)</label>
+														<input th:field="*{discount}" type="number" min="0" max="100"
+															class="form-control" placeholder="Giảm giá">
+													</div>
+													<div class="col-md-6 mb-3">
+														<label>Ngày thêm</label>
+														<input th:field="*{enteredDate}" type="date"
+															class="form-control" required>
+													</div>
+													<div class="col-12 mb-3">
+														<label>Hình ảnh</label>
+														<input type="file" name="file" class="form-control"
+															accept="image/*">
+													</div>
+													<div class="col-12 mb-3">
+														<label>Mô tả</label>
+														<textarea th:field="*{description}" class="form-control"
+															rows="3" placeholder="Mô tả sản phẩm"
+															maxlength="200"></textarea>
+														<small class="text-muted">Tối đa 200 ký tự</small>
+													</div>
+												</div>
+												<div class="modal-footer border-0">
+													<button type="submit" class="btn btn-primary">Thêm</button>
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Hủy</button>
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>
+							</div>
 
+							<!-- Bảng Sản Phẩm -->
+							<div class="card-body">
 								<div class="table-responsive">
-									<table id="add-row" class="display table table-striped table-hover">
+									<table id="add-row" class="table table-striped table-hover table-sm">
 										<thead>
 											<tr>
-												<th>Mã sản phẩm</th>
+												<th>ID</th>
 												<th>Hình ảnh</th>
-												<th>Tên sản phẩm</th>
+												<th>Tên</th>
 												<th>Thể loại</th>
-												<th>Đơn giá</th>
-												<th>Giảm giá</th>
-												<th>Số lượng</th>
-												<th>Ngày thêm</th>
-												<th>Mô tả sản phẩm</th>
-												<th style="width: 10%">Hành động</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>Mã sản phẩm</th>
-												<th>Hình ảnh</th>
-												<th>Tên sản phẩm</th>
-												<th>Thể loại</th>
-												<th>Đơn giá</th>
-												<th>Giảm giá</th>
-												<th>Số lượng</th>
-												<th>Ngày thêm</th>
-												<th>Mô tả sản phẩm</th>
+												<th>Giá</th>
+												<th>Giảm</th>
+												<th>SL</th>
+												<th>Ngày</th>
+												<th>Mô tả</th>
 												<th>Hành động</th>
 											</tr>
-										</tfoot>
+										</thead>
 										<tbody>
 											<tr th:each="item : ${products}">
 												<td>[[${item?.productId}]]</td>
-												<td>
-													<img th:src="@{'/loadImage?imageName='+${item.productImage}}"
-														width="80px" alt="product" />
+												<td><img th:src="@{'/loadImage?imageName='+${item.productImage}}"
+														width="50px" alt="product" /></td>
+												<td class="text-truncate" style="max-width: 120px;"
+													th:title="${item.productName}">
+													[[${item.productName}]]
 												</td>
-												<td>[[${item.productName}]]</td>
-												<td>[[${item.category.categoryName}]]</td>
-												<td
-													th:text="${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}+' đ'">
+												<td class="text-truncate" style="max-width: 100px;"
+													th:title="${item.category.categoryName}">
+													[[${item.category.categoryName}]]
 												</td>
-												<td>[[${#numbers.formatDecimal(item?.discount, 1, 'DEFAULT', 0,
-													'DEFAULT')}+' %']]</td>
-												<td>[[${item.quantity}]]</td>
-												<td>[[${item.enteredDate}]]</td>
-												<td>[[${item.description}]]</td>
+												<td class="text-truncate" style="max-width: 100px;"
+													th:title="${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}+' đ'">
+													[[${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0,
+													'DEFAULT')}]] đ
+												</td>
+												<td class="text-truncate" style="max-width: 80px;"
+													th:title="${item?.discount}+'%'">
+													[[${item?.discount}]]%
+												</td>
+												<td class="text-truncate" style="max-width: 80px;"
+													th:title="${item.quantity}">
+													[[${item.quantity}]]
+												</td>
+												<td class="text-truncate" style="max-width: 100px;"
+													th:title="${item.enteredDate}">
+													[[${item.enteredDate}]]
+												</td>
+												<td class="text-truncate" style="max-width: 150px;"
+													th:title="${item.description}">
+													[[${item.description}]]
+												</td>
 												<td>
 													<div class="form-button-action">
 														<a th:href="@{/admin/editProduct/{productId}(productId=${item.productId})}"
@@ -248,41 +219,64 @@
 											</tr>
 										</tbody>
 									</table>
+								</div>
+							</div>
+						</div>
 
-									<script>
-										function showConfigModalDialog(id, name) {
-											$('#name').text(name);
-											$('#yesOption').attr('href', '/admin/deleteProduct/' + id);
-											$('#configmationId').modal('show');
-										}
-									</script>
-
-									<!-- Modal -->
-									<div class="modal" tabindex="-1" role="dialog" id="configmationId">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" style="color: black">Xác nhận</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<p style="color: black">Bạn muốn xóa sản phẩm này không?</p>
-												</div>
-												<div class="modal-footer">
-													<a id="yesOption" type="button" class="btn btn-primary">Có</a>
-													<button type="button" class="btn btn-danger"
-														data-dismiss="modal">Không</button>
-												</div>
-											</div>
-										</div>
+						<!-- Modal Xác Nhận Xóa -->
+						<div class="modal fade" id="configmationId" tabindex="-1" role="dialog">
+							<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header border-0">
+										<h5 class="modal-title">Xác nhận</h5>
+										<button type="button" class="close" data-dismiss="modal">×</button>
+									</div>
+									<div class="modal-body">
+										Xóa sản phẩm "<span id="name"></span>"?
+									</div>
+									<div class="modal-footer border-0">
+										<a id="yesOption" class="btn btn-primary">Có</a>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Không</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<script>
+						function showConfigModalDialog(id, name) {
+							$('#name').text(name);
+							$('#yesOption').attr('href', '/admin/deleteProduct/' + id);
+							$('#configmationId').modal('show');
+						}
+					</script>
+
+					<style>
+						.table-sm th,
+						.table-sm td {
+							padding: 0.5rem;
+							vertical-align: middle;
+						}
+
+						.card-header {
+							padding: 1rem;
+						}
+
+						.modal-body {
+							padding: 1.5rem;
+						}
+
+						.form-control {
+							font-size: 0.9rem;
+						}
+
+						.text-truncate {
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+						}
+					</style>
 				</div>
 			</div>
 			<footer class="footer">
@@ -291,7 +285,7 @@
 						<ul class="nav">
 							<li class="nav-item">
 								<a class="nav-link" href="javascript:void(0);">
-									Hoa-Yen
+									KnowSphere
 								</a>
 							</li>
 							<li class="nav-item">
@@ -307,8 +301,8 @@
 						</ul>
 					</nav>
 					<div class="copyright ml-auto">
-						2024, made with <i class="fa fa-heart heart text-danger"></i> by <a
-							href="javascript:void(0);">Hoa-Yen</a>
+						2025, made with <i class="fa fa-heart heart text-danger"></i> by <a
+							href="javascript:void(0);">KnowSphere</a>
 					</div>
 				</div>
 			</footer>
